@@ -1,0 +1,14 @@
+# Self-signed HTTPS cert + PRIVATE KEY (recreated automatically when missing)
+certs/
+
+# Python
+__pycache__/
+*.pyc
+
+# Local notes
+HANDOFF.md
+
+# Recordings, if someone saves them inside the repo
+*.mkv
+*.mka
+*.mp4
