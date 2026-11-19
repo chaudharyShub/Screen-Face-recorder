@@ -230,8 +230,8 @@ class App:
     # ---------- recording ----------
     # While recording, three light ffmpeg processes each write one source to its own
     # file: screen, face camera, mic. Every file is timestamped on one shared clock
-    # (seconds since Start). On Stop, one pass composes the final video from them.
-    # Doing the overlay live made ffmpeg pause the screen grabber while waiting for
+    # (seconds since Start). On Stop, the files are kept as they are and
+    # sync-info.txt is written; combining them is a separate step. Doing the overlay live made ffmpeg pause the screen grabber while waiting for
     # camera frames (choppy video), or forced sync errors; offline it is exact.
 
     def build_capture_cmds(self, parts):
@@ -326,7 +326,7 @@ class App:
             messagebox.showerror("ffmpeg error", "\n".join(self.log_tail[-8:]))
 
     def stop(self):
-        """Stop capturing; composing the final video happens on a background thread."""
+        """Stop capturing; finishing the files and writing sync-info.txt happen on a background thread."""
         if self.finisher and self.finisher.is_alive():
             return
         self.btn.configure(state="disabled")

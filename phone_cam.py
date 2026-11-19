@@ -223,8 +223,8 @@ class PhoneCam:
                     conn.sendall(self.latest)
                 except OSError:
                     return
-                # Keep an exact 30 fps average (ffmpeg timestamps frames by count):
-                # after a short hiccup, send the missed frames quickly to catch up.
+                # Keep a steady 30 fps average: after a short hiccup, send the
+                # missed frames quickly to catch up.
                 next_t += 1 / FEED_FPS
                 delay = next_t - time.perf_counter()
                 if delay > 0:
